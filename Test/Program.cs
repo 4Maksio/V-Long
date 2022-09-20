@@ -1,4 +1,5 @@
-﻿using VLN;
+﻿using System.Threading.Tasks.Dataflow;
+using VLN;
 
 namespace Test
 {
@@ -14,8 +15,8 @@ namespace Test
         }
         static void Main(string[] args)
         {
-            V_Long v = new(14);
-            Console.WriteLine(v);
+            nint tmp = 15;
+            Console.WriteLine(tmp.);
         }
     }
 }
