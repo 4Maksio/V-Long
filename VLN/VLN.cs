@@ -176,17 +176,9 @@ namespace VLN
                 sb.Append(bTi(b));
             return sb.ToString();
         }
-
-        /// <summary>
-        /// Poprawić
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
+        private void Construct(object o)
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (bool b in number)
-                sb.Append(bTi(b));
-            return sb.ToString();
+
         }
     }
 }

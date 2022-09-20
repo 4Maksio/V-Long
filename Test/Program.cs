@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks.Dataflow;
+﻿using System.Numerics;
+using System.Threading.Tasks.Dataflow;
 using VLN;
 
 namespace Test
@@ -9,12 +10,13 @@ namespace Test
         {
             for (int i = 0; i < 8; i++)
             {
-                Console.Write(a&1);
+                Console.Write(a & 1);
                 a = (sbyte)(a >> 1);
             }
         }
         static void Main(string[] args)
         {
+            /*
             sbyte s1 = -1;
             byte s2 = 2;
             short s3 = -3;
@@ -30,6 +32,11 @@ namespace Test
             {
                 Console.WriteLine(v);
             }
+            */
+
+            BigInteger bigInteger1 = new BigInteger(UInt64.MaxValue);
+            BigInteger bigInteger3 = BigInteger.Pow(bigInteger1, int.MaxValue);
+            Console.WriteLine(bigInteger3);
         }
     }
 }
