@@ -1,0 +1,12 @@
+F:\G-kraken-repos\V-Long\VLN\obj\Debug\net6.0\VLN.csproj.AssemblyReference.cache
+F:\G-kraken-repos\V-Long\VLN\obj\Debug\net6.0\VLN.GeneratedMSBuildEditorConfig.editorconfig
+F:\G-kraken-repos\V-Long\VLN\obj\Debug\net6.0\VLN.AssemblyInfoInputs.cache
+F:\G-kraken-repos\V-Long\VLN\obj\Debug\net6.0\VLN.AssemblyInfo.cs
+F:\G-kraken-repos\V-Long\VLN\obj\Debug\net6.0\VLN.csproj.CoreCompileInputs.cache
+F:\G-kraken-repos\V-Long\VLN\bin\Debug\net6.0\VLN.deps.json
+F:\G-kraken-repos\V-Long\VLN\bin\Debug\net6.0\VLN.dll
+F:\G-kraken-repos\V-Long\VLN\bin\Debug\net6.0\VLN.pdb
+F:\G-kraken-repos\V-Long\VLN\obj\Debug\net6.0\VLN.dll
+F:\G-kraken-repos\V-Long\VLN\obj\Debug\net6.0\refint\VLN.dll
+F:\G-kraken-repos\V-Long\VLN\obj\Debug\net6.0\VLN.pdb
+F:\G-kraken-repos\V-Long\VLN\obj\Debug\net6.0\ref\VLN.dll
