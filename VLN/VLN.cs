@@ -6,17 +6,19 @@ namespace VLN
     {
         private bool[] number;
 
-        public V_Long() => number = new bool[0];
         private V_Long(bool[] number)
         {
             this.number = number;
         }
+        public V_Long() => number = new bool[0];
         public V_Long(sbyte Number)
         {
             number = new bool[8];
             if (Number < 0)
             {
                 number[0] = true;
+                Number = (sbyte)~Number;
+                Number++;
             }
             else
                 number[0] = false;
@@ -44,6 +46,8 @@ namespace VLN
             if (Number < 0)
             {
                 number[0] = true;
+                Number = (short)~Number;
+                Number++;
             }
             else
                 number[0] = false;
@@ -71,6 +75,8 @@ namespace VLN
             if (Number < 0)
             {
                 number[0] = true;
+                Number = ~Number;
+                Number++;
             }
             else
                 number[0] = false;
@@ -98,6 +104,8 @@ namespace VLN
             if (Number < 0)
             {
                 number[0] = true;
+                Number = ~Number;
+                Number++;
             }
             else
                 number[0] = false;
@@ -161,7 +169,18 @@ namespace VLN
             }
             number = New;
         }
+        public string WriteBinary()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (bool b in number)
+                sb.Append(bTi(b));
+            return sb.ToString();
+        }
 
+        /// <summary>
+        /// Poprawić
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
