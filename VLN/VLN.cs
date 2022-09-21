@@ -1,11 +1,22 @@
-﻿using System.Text;
+﻿using System.Numerics;
+using System.Text;
 
 namespace VLN
 {
+    /// <summary>
+    /// Very long integer number
+    /// </summary>
     public struct V_Long
     {
+        /// <summary>
+        /// Table of bits with sign on first bit and the rest is writen from last to first.
+        /// </summary>
         private bool[] number;
 
+        /// <summary>
+        /// For methods only
+        /// </summary>
+        /// <param name="number">Passed table representing number</param>
         private V_Long(bool[] number)
         {
             this.number = number;
@@ -141,7 +152,13 @@ namespace VLN
             else
                 this = new V_Long((UInt64)Number);
         }
+        //public V_Long(BigInteger Number) => this = new();
 
+        /// <summary>
+        /// Integer to boolean
+        /// </summary>
+        /// <returns>True for one, false for 0</returns>
+        /// <exception cref="ArgumentException">If parameter is neither 1 or 0.</exception>
         private bool iTb(byte a)
         {
             if (a == 1)
@@ -150,7 +167,14 @@ namespace VLN
                 return false;
             throw new ArgumentException("Wartość konwertowana na bool nie jest binarna");
         }
+        /// <summary>
+        /// Boolean to integer
+        /// </summary>
+        /// <returns>1 or 0</returns>
         private byte bTi(bool a) => a ? (byte)1 : (byte)0;
+        /// <summary>
+        /// Cut unused cells in table with zeros
+        /// </summary>
         private void delZeros()
         {
             int index = 0;
@@ -169,6 +193,10 @@ namespace VLN
             }
             number = New;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Table of bits</returns>
         public string WriteBinary()
         {
             StringBuilder sb = new StringBuilder();
@@ -176,6 +204,10 @@ namespace VLN
                 sb.Append(bTi(b));
             return sb.ToString();
         }
+        /// <summary>
+        /// Body for constructors
+        /// </summary>
+        /// <param name="o">Parameter from constructor</param>
         private void Construct(object o)
         {
 
