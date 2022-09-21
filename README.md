@@ -8,21 +8,21 @@
 * dokumentacja
 ## Do stworzenia:
 * implementacja
- * IComparable
- * ISerializable
+  * IComparable
+  * ISerializable
 * operatory
- * +
- * -
- * *
- * /
- * %
- * ^
+  * \+
+  * \-
+  * \*
+  * /
+  * %
+  * ^
 ## Do zmodyfikowania:
 * używanie struktury w samej sobie tam, gdzie jest to potrzebne
 ## Do zastanowienia:
 * operatory logiczne
- * |
- * &
+  * |
+  * &
  
 ### EN
 ## Last worked at: [Constructors](https://github.com/4Maksio/V-Long/tree/Constructors)
@@ -32,18 +32,18 @@
 * dokumentation
 ## To create:
 * implementation
- * IComparable
- * ISerializable
+  * IComparable
+  * ISerializable
 * operators
- * +
- * -
- * *
- * /
- * %
- * ^
+  * \+
+  * \-
+  * \*
+  * /
+  * %
+  * ^
 ## To modify:
 * using V-Long within itself when it's necessary
 ## To think about:
 * logical operators
- * |
- * &
+  * |
+  * &
