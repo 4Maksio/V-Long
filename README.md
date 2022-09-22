@@ -3,8 +3,8 @@
 ### PL
 ## Ostatnio modyfikowana gałąź: [Constructors](https://github.com/4Maksio/V-Long/tree/Constructors)
 ## Stworzone:
-## W trakcie tworzenia:
 * konstruktory
+## W trakcie tworzenia:
 * dokumentacja
 ## Do stworzenia:
 * implementacja
@@ -27,8 +27,8 @@
 ### EN
 ## Last worked at: [Constructors](https://github.com/4Maksio/V-Long/tree/Constructors)
 ## Created:
-## In creation:
 * constructors
+## In creation:
 * dokumentation
 ## To create:
 * implementation
