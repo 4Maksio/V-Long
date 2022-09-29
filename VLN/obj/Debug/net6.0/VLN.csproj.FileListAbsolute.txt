@@ -10,3 +10,15 @@ F:\G-kraken-repos\V-Long\VLN\obj\Debug\net6.0\VLN.dll
 F:\G-kraken-repos\V-Long\VLN\obj\Debug\net6.0\refint\VLN.dll
 F:\G-kraken-repos\V-Long\VLN\obj\Debug\net6.0\VLN.pdb
 F:\G-kraken-repos\V-Long\VLN\obj\Debug\net6.0\ref\VLN.dll
+C:\Users\jozst\Documents\Fiz_Lab_Git_2022\V-Long\VLN\bin\Debug\net6.0\VLN.deps.json
+C:\Users\jozst\Documents\Fiz_Lab_Git_2022\V-Long\VLN\bin\Debug\net6.0\VLN.dll
+C:\Users\jozst\Documents\Fiz_Lab_Git_2022\V-Long\VLN\bin\Debug\net6.0\VLN.pdb
+C:\Users\jozst\Documents\Fiz_Lab_Git_2022\V-Long\VLN\obj\Debug\net6.0\VLN.csproj.AssemblyReference.cache
+C:\Users\jozst\Documents\Fiz_Lab_Git_2022\V-Long\VLN\obj\Debug\net6.0\VLN.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jozst\Documents\Fiz_Lab_Git_2022\V-Long\VLN\obj\Debug\net6.0\VLN.AssemblyInfoInputs.cache
+C:\Users\jozst\Documents\Fiz_Lab_Git_2022\V-Long\VLN\obj\Debug\net6.0\VLN.AssemblyInfo.cs
+C:\Users\jozst\Documents\Fiz_Lab_Git_2022\V-Long\VLN\obj\Debug\net6.0\VLN.csproj.CoreCompileInputs.cache
+C:\Users\jozst\Documents\Fiz_Lab_Git_2022\V-Long\VLN\obj\Debug\net6.0\VLN.dll
+C:\Users\jozst\Documents\Fiz_Lab_Git_2022\V-Long\VLN\obj\Debug\net6.0\refint\VLN.dll
+C:\Users\jozst\Documents\Fiz_Lab_Git_2022\V-Long\VLN\obj\Debug\net6.0\VLN.pdb
+C:\Users\jozst\Documents\Fiz_Lab_Git_2022\V-Long\VLN\obj\Debug\net6.0\ref\VLN.dll

@@ -272,6 +272,8 @@ namespace VLN
         /// </summary>
         private void fillDecim()
         {
+            if (number.Length < 2)
+                return;
             char[][] New = new char[number.Length - 1][];
             New[0] = decim[0];
             for (int i = 1; i < New.Length; i++)
@@ -288,14 +290,17 @@ namespace VLN
         private char[] Twice(char[] tab)
         {
             char[] New;
-            if (tab[0] > '1' && tab[0] < '5')
+            if (tab[0] > '0' && tab[0] < '5')
             {
                 New = new char[tab.Length];
                 for (int i = tab.Length - 1; i >= 0; i--)
                 {
-                    if (tab[i] >= 5)
+                    if (tab[i] >= '5')
                         New[i - 1] = '1';
-                    New[i] = AddDecimal(New[i], tab[i]);
+                    if (New[i] == '1')
+                        New[i] = AddDecimal(New[i], AddDecimal(tab[i], tab[i]));
+                    else
+                        New[i] = AddDecimal(tab[i], tab[i]);
                 }
             }
             else
@@ -305,7 +310,10 @@ namespace VLN
                 {
                     if (tab[i] >= 5)
                         New[i] = '1';
-                    New[i + 1] = AddDecimal(New[i+1], tab[i]);
+                    if (New[i + 1] == '1')
+                        New[i + 1] = AddDecimal(New[i + 1], AddDecimal(tab[i], tab[i]));
+                    else
+                        New[i + 1] = AddDecimal(tab[i], tab[i]);
                 }
             }
             return New;
@@ -318,10 +326,7 @@ namespace VLN
         /// <returns>Unit of sum of digits</returns>
         private char AddDecimal(char a, char b)
         {
-            byte tmp = 0;
-            if (a == '1')
-                tmp++;
-            tmp += (byte)(b - '0');
+            byte tmp = (byte)(a + b - 2 * '0');
             if (tmp >= 10)
                 tmp -= 10;
             return tmp.ToString()[0];
@@ -334,27 +339,25 @@ namespace VLN
         /// <returns>Char of digits of sum of tables</returns>
         private char[] Sum(char[] A, char[] B)
         {
+            if (A.Length == 0)
+                return B;
+            if (B.Length == 0)
+                return A;
+            char tmp;
             char[] chars = new char[Math.Max(A.Length, B.Length) + 1];
-            int differ = Math.Abs(A.Length - B.Length);
-            bool flag;
-            if (A.Length < B.Length)
-                flag = true;
-            else flag = false;
-            for (int i = Math.Max(A.Length, B.Length) - 1; i > differ; i--)
+            for (int i = 0; i < chars.Length; i++)
+                chars[i] = '0';
+            for (int i = 1; i < chars.Length; i++)
             {
-                if (flag)
+                if (A.Length >= chars.Length - i)
+                    chars[i] = AddDecimal(chars[i], A[i - (chars.Length - A.Length)]);
+                if (B.Length >= chars.Length - i)
+                    chars[i] = AddDecimal(chars[i], B[i - (chars.Length - B.Length)]);
+                if (A.Length >= chars.Length - i && B.Length >= chars.Length - i)
                 {
-                    chars[i + 1] = AddDecimal(B[i], chars[i + 1]);
-                    chars[i + 1] = AddDecimal(chars[i + 1], A[i - differ]);
-                    if (chars[i + 1] - '0' < B[i] - '0' && chars[i + 1] - '0' < A[i - differ] - '0')
-                        chars[i] = '1';
-                }
-                else
-                {
-                    chars[i + 1] = AddDecimal(B[i - differ], chars[i + 1]);
-                    chars[i + 1] = AddDecimal(chars[i + 1], A[i]);
-                    if (chars[i + 1] - '0' < B[i - differ] - '0' && chars[i + 1] - '0' < A[i] - '0')
-                        chars[i] = '1';
+                    tmp = AddDecimal(A[i - (chars.Length - A.Length)], B[i - (chars.Length - B.Length)]);
+                    if (tmp < A[i - (chars.Length - A.Length)] && tmp < B[i - (chars.Length - B.Length)])
+                        chars[i - 1] = AddDecimal(chars[i - 1], '1');
                 }
             }
             if (chars[0] == '1')
@@ -381,20 +384,24 @@ namespace VLN
         /// <summary>
         /// Get length of number in binary
         /// </summary>
-        public bool[] Table => number;
+        public int Table => number.Length;
 
         /// <summary>
         /// Returns number in decimal system
         /// </summary>
         public override string ToString()
         {
-            char[] liczba = {};
+            if (number.Length < 2)
+                return "0";
+            char[] liczba = { };
             for (int i = 1; i < number.Length; i++)
             {
                 if (number[i])
-                    liczba = Sum(liczba, decim[i-1]);
+                    liczba = Sum(liczba, decim[i - 1]);
             }
             StringBuilder sb = new();
+            if (number[0])
+                sb.Append('-');
             foreach (char c in liczba)
             {
                 sb.Append(c);
