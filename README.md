@@ -1,13 +1,12 @@
 # V-Long
 
-#### 29.09.2022
+#### 30.09.2022
 
 ### PL
-## Ostatnio modyfikowana gałąź: [Main](https://github.com/4Maksio/V-Long)
-> Wyświetlanie działa poprawnie dla zakresu <-99;99>.  
+## Ostatnio modyfikowana gałąź: [RepairingToString](https://github.com/4Maksio/V-Long/tree/RepairingToString)
+> Wyświetlanie działa poprawnie dla zakresu <-127;127>.  
 > Trzeba znaleźć robala.  
-> Zmieniłem bebechy Sum(char\[], char\[])  
-> Podejrzewam metodę Sum(char\[], char\[])
+> Dodałem funkcję zajmującą się wynikami dodawania większymi niż 9.
 ## Stworzone:
 * konstruktory
 ## W trakcie tworzenia:
@@ -32,11 +31,10 @@
   * &
  
 ### EN
-## Last worked at: [Main](https://github.com/4Maksio/V-Long)
-> ToString works for range <-99;99>.  
+## Last worked at: [RepairingToString](https://github.com/4Maksio/V-Long/tree/RepairingToString)
+> ToString works for range <-127;127>.  
 > Need to find a bug.  
-> Changed inside of Sum(char\[], char\[])  
-> Suspected: Sum(char\[], char\[])
+> Added fuction to deal with sum results higher than 9.
 ## Created:
 * constructors
 ## In creation:
