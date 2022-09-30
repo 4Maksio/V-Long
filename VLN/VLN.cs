@@ -41,20 +41,38 @@ namespace VLN
         /// <param name="Number">Number for convertion</param>
         public V_Long(sbyte Number)
         {
+            bool Flag = false;
             number = new bool[8];
             if (Number < 0)
             {
+                if (Number == sbyte.MinValue)
+                {
+                    Flag = true;
+                    number = new bool[9];
+                }
+                else
+                {
+                    Number = (sbyte)~Number;
+                    Number++;
+                }
                 number[0] = true;
-                Number = (sbyte)~Number;
-                Number++;
             }
             else
                 number[0] = false;
-            for (int i = 1; i < 8; i++)
+            if (Flag)
             {
-                number[i] = iTb((byte)(Number & 1));
-                Number >>= 1;
+                for (int i = 1; i < 8; i++)
+                {
+                    number[i] = false;
+                }
+                number[8] = true;
             }
+            else
+                for (int i = 1; i < 8; i++)
+                {
+                    number[i] = iTb((byte)(Number & 1));
+                    Number >>= 1;
+                }
             decim = default;
             iniciate();
         }
@@ -80,20 +98,38 @@ namespace VLN
         /// <param name="Number">Number for convertion</param>
         public V_Long(short Number)
         {
+            bool Flag = false;
             number = new bool[16];
             if (Number < 0)
             {
+                if (Number == short.MinValue)
+                {
+                    Flag = true;
+                    number = new bool[17];
+                }
+                else
+                {
+                    Number = (short)~Number;
+                    Number++;
+                }
                 number[0] = true;
-                Number = (short)~Number;
-                Number++;
             }
             else
                 number[0] = false;
-            for (int i = 1; i < 16; i++)
+            if (Flag)
             {
-                number[i] = iTb((byte)(Number & 1));
-                Number >>= 1;
+                for (int i = 1; i < 16; i++)
+                {
+                    number[i] = false;
+                }
+                number[16] = true;
             }
+            else
+                for (int i = 1; i < 16; i++)
+                {
+                    number[i] = iTb((byte)(Number & 1));
+                    Number >>= 1;
+                }
             decim = default;
             iniciate();
         }
@@ -119,20 +155,38 @@ namespace VLN
         /// <param name="Number">Number for convertion</param>
         public V_Long(int Number)
         {
+            bool Flag = false;
             number = new bool[32];
             if (Number < 0)
             {
+                if (Number == int.MinValue)
+                {
+                    Flag = true;
+                    number = new bool[33];
+                }
+                else
+                {
+                    Number = (int)~Number;
+                    Number++;
+                }
                 number[0] = true;
-                Number = ~Number;
-                Number++;
             }
             else
                 number[0] = false;
-            for (int i = 1; i < 16; i++)
+            if (Flag)
             {
-                number[i] = iTb((byte)(Number & 1));
-                Number >>= 1;
+                for (int i = 1; i < 32; i++)
+                {
+                    number[i] = false;
+                }
+                number[32] = true;
             }
+            else
+                for (int i = 1; i < 32; i++)
+                {
+                    number[i] = iTb((byte)(Number & 1));
+                    Number >>= 1;
+                }
             decim = default;
             iniciate();
         }
@@ -158,20 +212,38 @@ namespace VLN
         /// <param name="Number">Number for convertion</param>
         public V_Long(long Number)
         {
+            bool Flag = false;
             number = new bool[64];
             if (Number < 0)
             {
+                if (Number == long.MinValue)
+                {
+                    Flag = true;
+                    number = new bool[65];
+                }
+                else
+                {
+                    Number = ~Number;
+                    Number++;
+                }
                 number[0] = true;
-                Number = ~Number;
-                Number++;
             }
             else
                 number[0] = false;
-            for (int i = 1; i < 64; i++)
+            if (Flag)
             {
-                number[i] = iTb((byte)(Number & 1));
-                Number >>= 1;
+                for (int i = 1; i < 64; i++)
+                {
+                    number[i] = false;
+                }
+                number[64] = true;
             }
+            else
+                for (int i = 1; i < 64; i++)
+                {
+                    number[i] = iTb((byte)(Number & 1));
+                    Number >>= 1;
+                }
             decim = default;
             iniciate();
         }
@@ -278,45 +350,9 @@ namespace VLN
             New[0] = decim[0];
             for (int i = 1; i < New.Length; i++)
             {
-                New[i] = Twice(New[i - 1]);
+                New[i] = Sum(New[i - 1], New[i - 1]);
             }
             decim = New;
-        }
-        /// <summary>
-        /// Returns twice value of char table (digits)
-        /// </summary>
-        /// <param name="tab">Value in chars</param>
-        /// <returns>Table of chars representing twice of value of tab</returns>
-        private char[] Twice(char[] tab)
-        {
-            char[] New;
-            if (tab[0] > '0' && tab[0] < '5')
-            {
-                New = new char[tab.Length];
-                for (int i = tab.Length - 1; i >= 0; i--)
-                {
-                    if (tab[i] >= '5')
-                        New[i - 1] = '1';
-                    if (New[i] == '1')
-                        New[i] = AddDecimal(New[i], AddDecimal(tab[i], tab[i]));
-                    else
-                        New[i] = AddDecimal(tab[i], tab[i]);
-                }
-            }
-            else
-            {
-                New = new char[tab.Length + 1];
-                for (int i = tab.Length - 1; i >= 0; i--)
-                {
-                    if (tab[i] >= 5)
-                        New[i] = '1';
-                    if (New[i + 1] == '1')
-                        New[i + 1] = AddDecimal(New[i + 1], AddDecimal(tab[i], tab[i]));
-                    else
-                        New[i + 1] = AddDecimal(tab[i], tab[i]);
-                }
-            }
-            return New;
         }
         /// <summary>
         /// Returns unity digit from sum of digits in chars
@@ -379,8 +415,8 @@ namespace VLN
             if (idx == 0)
                 throw new Exception("Table not prepared for operation. Overflow occured.");
             c[idx - 1] = AddDecimal(c[idx - 1], '1');
-            if (c[idx-1]=='0')
-                overflow(ref c, idx-1);
+            if (c[idx - 1] == '0')
+                overflow(ref c, idx - 1);
         }
         /// <summary>
         /// Get number wrote binary
