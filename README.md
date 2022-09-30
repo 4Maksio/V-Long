@@ -1,13 +1,14 @@
 # V-Long
 
-#### 29.09.2022
+#### 30.09.2022
 
 ### PL
-## Ostatnio modyfikowana gałąź: [Main](https://github.com/4Maksio/V-Long)
-> Wyświetlanie działa poprawnie dla zakresu <-99;99>.  
-> Trzeba znaleźć robala.
-> Zmieniłem bebechy Sum(char\[], char\[])
-> Podejrzewam metodę Sum(char\[], char\[])
+## O projekcie
+> Tworzę bibliotekę w C# mającą strukturę, która będzie realizowała podstawowe działania na liczbach spoza zakresu Int64 i Uint64.  
+> Zacząłem projekt zanim dowiedziałem się o istnieniu BigInteger.  
+> Optymalizuję co mi wpadnie do głowy na bierząco, będę optymalizował na końcu. Nie mam jeszcze doświadczenia zawodowego w związku z programowaniem.
+## Ostatnio modyfikowana gałąź: [RepairingToString](https://github.com/4Maksio/V-Long/tree/RepairingToString)
+> Wyświetlanie działa poprawnie.
 ## Stworzone:
 * konstruktory
 ## W trakcie tworzenia:
@@ -32,11 +33,12 @@
   * &
  
 ### EN
-## Last worked at: [Main](https://github.com/4Maksio/V-Long)
-> ToString works for range <-99;99>.  
-> Need to find a bug.
-> Changed inside of Sum(char\[], char\[])
-> Suspected: Sum(char\[], char\[])
+## About
+> I'm creating library in C# that have struct witch will be doing basic operations on integers without limiting them to be written on 64 bits.
+> I started without knowing about BigInteger.  
+> Optimalization will be done after everything else becouse my lack of experience.
+## Last worked at: [RepairingToString](https://github.com/4Maksio/V-Long/tree/RepairingToString)
+> ToString works fine.
 ## Created:
 * constructors
 ## In creation:
