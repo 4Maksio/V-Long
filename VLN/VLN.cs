@@ -357,7 +357,7 @@ namespace VLN
                 {
                     tmp = AddDecimal(A[i - (chars.Length - A.Length)], B[i - (chars.Length - B.Length)]);
                     if (tmp < A[i - (chars.Length - A.Length)] && tmp < B[i - (chars.Length - B.Length)])
-                        chars[i - 1] = AddDecimal(chars[i - 1], '1');
+                        overflow(ref chars, i);
                 }
             }
             if (chars[0] == '1')
@@ -368,6 +368,19 @@ namespace VLN
                 ret[i] = chars[i + 1];
             }
             return ret;
+        }
+        /// <summary>
+        /// Deals with sum results greater than 10
+        /// </summary>
+        /// <param name="c">Table where overflow occured</param>
+        /// <param name="idx">index on witch the overflow occured</param>
+        private void overflow(ref char[] c, int idx)
+        {
+            if (idx == 0)
+                throw new Exception("Table not prepared for operation. Overflow occured.");
+            c[idx - 1] = AddDecimal(c[idx - 1], '1');
+            if (c[idx-1]=='0')
+                overflow(ref c, idx-1);
         }
         /// <summary>
         /// Get number wrote binary
