@@ -11,9 +11,10 @@
 > Wyświetlanie działa poprawnie.
 ## Stworzone:
 * konstruktory
+* WriteBinary
+* ToString()
 ## W trakcie tworzenia:
 * dokumentacja
-* ToString() (Wyświetlanie)
 ## Do stworzenia:
 * implementacja
   * IComparable
@@ -36,14 +37,15 @@
 ## About
 > I'm creating library in C# that have struct witch will be doing basic operations on integers without limiting them to be written on 64 bits.
 > I started without knowing about BigInteger.  
-> Optimalization will be done after everything else becouse my lack of experience.
+> Optimalization will be done after everything else becouse of my lack of experience.
 ## Last worked at: [RepairingToString](https://github.com/4Maksio/V-Long/tree/RepairingToString)
 > ToString works fine.
 ## Created:
 * constructors
+* WriteBinary
+* ToString()
 ## In creation:
 * dokumentation
-* ToString()
 ## To create:
 * implementation
   * IComparable
