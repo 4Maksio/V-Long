@@ -11,9 +11,10 @@
 > Tablica przechowująca tablice znaków do wypisania kolejnych potęg dwójki jest teraz statyczna.
 ## Stworzone:
 * konstruktory
+* WriteBinary
+* ToString()
 ## W trakcie tworzenia:
 * dokumentacja
-* ToString() (Wyświetlanie)
 ## Do stworzenia:
 * implementacja
   * IComparable
@@ -42,9 +43,10 @@
 > Array containing chars arrays for ToString() is now static.
 ## Created:
 * constructors
+* WriteBinary
+* ToString()
 ## In creation:
 * dokumentation
-* ToString()
 ## To create:
 * implementation
   * IComparable
