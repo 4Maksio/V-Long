@@ -14,7 +14,7 @@ namespace VLN
         /// <summary>
         /// Table of tables of chars representing subsequent powers of 2
         /// </summary>
-        private char[][] decim;
+        private static char[][] decim;
 
         /// <summary>
         /// For inside methods only
@@ -346,13 +346,21 @@ namespace VLN
         {
             if (number.Length < 2)
                 return;
-            char[][] New = new char[number.Length - 1][];
-            New[0] = decim[0];
-            for (int i = 1; i < New.Length; i++)
+            if (decim.Length < number.Length - 1)
             {
-                New[i] = Sum(New[i - 1], New[i - 1]);
+                int tmp = decim.Length - 1;
+                Array.Resize(ref decim, number.Length - 1);
+                if (tmp == 0)
+                {
+                    decim[0] = new[] { '1' };
+                    tmp = 1;
+                }
+                while (tmp < number.Length-1)
+                {
+                    decim[tmp] = Sum(decim[tmp - 1], decim[tmp - 1]);
+                    tmp++;
+                }
             }
-            decim = New;
         }
         /// <summary>
         /// Returns unity digit from sum of digits in chars
