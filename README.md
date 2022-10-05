@@ -15,9 +15,10 @@
 * ToString()
 ## W trakcie tworzenia:
 * dokumentacja
+* IComparable
 ## Do stworzenia:
 * implementacja
-  * IComparable
+  * IClonable
   * ISerializable
 * operatory
   * \+
@@ -47,9 +48,10 @@
 * ToString()
 ## In creation:
 * dokumentation
+* IComparable
 ## To create:
 * implementation
-  * IComparable
+  * IClonableb
   * ISerializable
 * operators
   * \+
