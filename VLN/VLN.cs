@@ -1,11 +1,12 @@
-﻿using System.Text;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text;
 
 namespace VLN
 {
     /// <summary>
     /// Very long integer number
     /// </summary>
-    public struct V_Long
+    public struct V_Long : IComparable
     {
         /// <summary>
         /// Table of bits with sign on first bit and the rest is writen from last to first.
@@ -25,6 +26,44 @@ namespace VLN
             this.number = number;
             decim = default;
             iniciate();
+        }
+        /// <summary>
+        /// Crates instance depending on type of argument
+        /// </summary>
+        /// <param name="obj">obj may be standard integer or other numeric type</param>
+        public V_Long(object? obj)
+        {
+            switch (obj)
+            {
+                case sbyte:
+                    this = new();
+                    break;
+                case byte:
+                    this = new();
+                    break;
+                case short:
+                    this = new();
+                    break;
+                case ushort:
+                    this = new();
+                    break;
+                case int:
+                    this = new();
+                    break;
+                case uint:
+                    this = new();
+                    break;
+                case long:
+                    this = new();
+                    break;
+                case ulong:
+                    this = new();
+                    break;
+                case null:
+                default:
+                    this = new();
+                    break;
+            }
         }
         /// <summary>
         /// This represents zero or null. Basicly useless.
@@ -464,6 +503,48 @@ namespace VLN
                 sb.Append(c);
             }
             return sb.ToString();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals([NotNullWhen(true)] object? obj)
+        {
+            if (obj is null)
+                return false;
+            V_Long v = new(obj);
+            return Equals(v);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public bool Equals(V_Long v)
+        {
+            if (Table == v.Table && number[0] == v.number[0])
+            {
+                for(int i = number.Length-1; i >=0; i--)
+                {
+                    if (number[i] != v.number[i])
+                        return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Compares V-Long with any integer type
+        /// </summary>
+        /// <param name="obj">Structure beeing Compared to</param>
+        /// <returns>1 for obj beeing lower<br/>
+        /// 0 for equality<br/>
+        /// -1 for obj beeing higher</returns>
+        public int CompareTo(object? obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }
