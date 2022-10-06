@@ -36,32 +36,47 @@ namespace VLN
             switch (obj)
             {
                 case sbyte:
-                    this = new();
+                    this = new((sbyte)obj);
                     break;
                 case byte:
-                    this = new();
+                    this = new((byte)obj);
                     break;
                 case short:
-                    this = new();
+                    this = new((short)obj);
                     break;
                 case ushort:
-                    this = new();
+                    this = new((ushort)obj);
                     break;
                 case int:
-                    this = new();
+                    this = new((int)obj);
                     break;
                 case uint:
-                    this = new();
+                    this = new((uint)obj);
                     break;
                 case long:
-                    this = new();
+                    this = new((long)obj);
                     break;
                 case ulong:
-                    this = new();
+                    this = new((ulong)obj);
+                    break;
+                case nint:
+                    this = new((nint)obj);
+                    break;
+                case nuint:
+                    this = new((nuint)obj);
+                    break;
+                case float:
+                    this = new(Convert.ToInt64((float)obj));
+                    break;
+                case double:
+                    this = new(Convert.ToInt64((double)obj));
+                    break;
+                case decimal:
+                    this = new(Convert.ToInt64((decimal)obj));
                     break;
                 case null:
                 default:
-                    this = new();
+                    this = new(new[] { true });
                     break;
             }
         }
@@ -505,10 +520,10 @@ namespace VLN
             return sb.ToString();
         }
         /// <summary>
-        /// 
+        /// Compares object with instance of V_Long
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <param name="obj">Object representing a number</param>
+        /// <returns>True if obj is equal<br/>false otherwise</returns>
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
             if (obj is null)
@@ -517,10 +532,10 @@ namespace VLN
             return Equals(v);
         }
         /// <summary>
-        /// 
+        /// Compares this instance with another V_Long
         /// </summary>
-        /// <param name="v"></param>
-        /// <returns></returns>
+        /// <param name="v">V_Long variable</param>
+        /// <returns>True if obj is equal<br/>false otherwise</returns>
         public bool Equals(V_Long v)
         {
             if (Table == v.Table && number[0] == v.number[0])

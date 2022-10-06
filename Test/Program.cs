@@ -86,6 +86,13 @@ namespace Test
             }
             Console.WriteLine("Koniec ulong");
             */
+
+            for (short i = short.MinValue; i < short.MaxValue; i++)
+            {
+                V = new(i);
+                if (!V.Equals(i))
+                    Console.WriteLine(i);
+            }
         }
     }
 }
