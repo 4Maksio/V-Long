@@ -1,18 +1,19 @@
 # V-Long
 
-#### 04.10.2022
+#### 07.10.2022
 
 ### PL
 ## O projekcie
 > Tworzę bibliotekę w C# mającą strukturę, która będzie realizowała podstawowe działania na liczbach spoza zakresu Int64 i Uint64.  
 > Zacząłem projekt zanim dowiedziałem się o istnieniu BigInteger.  
 > Optymalizuję co mi wpadnie do głowy na bierząco, będę optymalizował na końcu. Nie mam jeszcze doświadczenia zawodowego w związku z programowaniem.
-## Ostatnio modyfikowana gałąź: [master](https://github.com/4Maksio/V-Long/tree/master)
-> Tablica przechowująca tablice znaków do wypisania kolejnych potęg dwójki jest teraz statyczna.
+## Ostatnio modyfikowana gałąź: [IComparable](https://github.com/4Maksio/V-Long/tree/IComparable)
+> Nadpisałem metodę Equals i dodałem konstruktor przyjmujący _object?_
 ## Stworzone:
 * konstruktory
 * WriteBinary
 * ToString()
+* Equals()
 ## W trakcie tworzenia:
 * dokumentacja
 * IComparable
@@ -40,12 +41,13 @@
 > I'm creating library in C# that have struct witch will be doing basic operations on integers without limiting them to be written on 64 bits.
 > I started without knowing about BigInteger.  
 > Optimalization will be done after everything else becouse my lack of experience.
-## Last worked at: [master](https://github.com/4Maksio/V-Long/tree/master)
-> Array containing chars arrays for ToString() is now static.
+## Last worked at: [IComparable](https://github.com/4Maksio/V-Long/tree/IComparable)
+> I overwritten method Equals and I added new constructor with _object?_
 ## Created:
 * constructors
 * WriteBinary
 * ToString()
+* Equals()
 ## In creation:
 * dokumentation
 * IComparable
@@ -62,7 +64,7 @@
   * ^
 ## To modify:
 * using V-Long within itself when it's necessary
-* add coments for local variables
+* add comments for local variables
 ## To think about:
 * logical operators
   * |
