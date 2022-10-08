@@ -411,7 +411,7 @@ namespace VLN
                 }
                 while (tmp < number.Length-1)
                 {
-                    decim[tmp] = Sum(decim[tmp - 1], decim[tmp - 1]);
+                    decim[tmp] = sum(decim[tmp - 1], decim[tmp - 1]);
                     tmp++;
                 }
             }
@@ -422,7 +422,7 @@ namespace VLN
         /// <param name="a">first digit</param>
         /// <param name="b">second digit</param>
         /// <returns>Unit of sum of digits</returns>
-        private char AddDecimal(char a, char b)
+        private char addDecimal(char a, char b)
         {
             byte tmp = (byte)(a + b - 2 * '0');
             if (tmp >= 10)
@@ -435,7 +435,7 @@ namespace VLN
         /// <param name="A">first char table</param>
         /// <param name="B">second char table</param>
         /// <returns>Char of digits of sum of tables</returns>
-        private char[] Sum(char[] A, char[] B)
+        private char[] sum(char[] A, char[] B)
         {
             if (A.Length == 0)
                 return B;
@@ -448,12 +448,12 @@ namespace VLN
             for (int i = 1; i < chars.Length; i++)
             {
                 if (A.Length >= chars.Length - i)
-                    chars[i] = AddDecimal(chars[i], A[i - (chars.Length - A.Length)]);
+                    chars[i] = addDecimal(chars[i], A[i - (chars.Length - A.Length)]);
                 if (B.Length >= chars.Length - i)
-                    chars[i] = AddDecimal(chars[i], B[i - (chars.Length - B.Length)]);
+                    chars[i] = addDecimal(chars[i], B[i - (chars.Length - B.Length)]);
                 if (A.Length >= chars.Length - i && B.Length >= chars.Length - i)
                 {
-                    tmp = AddDecimal(A[i - (chars.Length - A.Length)], B[i - (chars.Length - B.Length)]);
+                    tmp = addDecimal(A[i - (chars.Length - A.Length)], B[i - (chars.Length - B.Length)]);
                     if (tmp < A[i - (chars.Length - A.Length)] && tmp < B[i - (chars.Length - B.Length)])
                         overflow(ref chars, i);
                 }
@@ -476,7 +476,7 @@ namespace VLN
         {
             if (idx == 0)
                 throw new Exception("Table not prepared for operation. Overflow occured.");
-            c[idx - 1] = AddDecimal(c[idx - 1], '1');
+            c[idx - 1] = addDecimal(c[idx - 1], '1');
             if (c[idx - 1] == '0')
                 overflow(ref c, idx - 1);
         }
@@ -491,7 +491,38 @@ namespace VLN
                 sb.Append(bTi(b));
             return sb.ToString();
         }
+        /// <summary>
+        /// Checks if object can be converted into V_Long
+        /// </summary>
+        /// <param name="obj">Object for beeing checked</param>
+        /// <returns>True for any basic numeric type</returns>
+        public static bool IsOperatable(object? obj)
+        {
+            switch (obj)
+            {
+                case sbyte:
+                case byte:
+                case short:
+                case ushort:
+                case int:
+                case uint:
+                case long:
+                case ulong:
+                case nint:
+                case nuint:
+                case float:
+                case double:
+                case decimal:
+                    return true;
+                default:
+                    return false;
+            }
+        }
 
+        /// <summary>
+        /// Returns if the instance was created incorrectly
+        /// </summary>
+        public bool IsNone => number.Length == 1 && number[0] == true;
         /// <summary>
         /// Get length of number in binary
         /// </summary>
@@ -508,7 +539,7 @@ namespace VLN
             for (int i = 1; i < number.Length; i++)
             {
                 if (number[i])
-                    liczba = Sum(liczba, decim[i - 1]);
+                    liczba = sum(liczba, decim[i - 1]);
             }
             StringBuilder sb = new();
             if (number[0])
