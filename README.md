@@ -1,6 +1,6 @@
 # V-Long
 
-#### 07.10.2022
+#### 09.10.2022
 
 ### PL
 ## O projekcie
@@ -8,15 +8,16 @@
 > Zacząłem projekt zanim dowiedziałem się o istnieniu BigInteger.  
 > Optymalizuję co mi wpadnie do głowy na bierząco, będę optymalizował na końcu. Nie mam jeszcze doświadczenia zawodowego w związku z programowaniem.
 ## Ostatnio modyfikowana gałąź: [IComparable](https://github.com/4Maksio/V-Long/tree/IComparable)
-> Nadpisałem metodę Equals i dodałem konstruktor przyjmujący _object?_
+> Zaimplementowałem operatory porównania i interfejs IComparable.  
+> Potrzebuję sprawdzić działanie.
 ## Stworzone:
 * konstruktory
 * WriteBinary
 * ToString()
-* Equals()
+* Equals(), ==, >, <, <=, >=.
+* IComparable
 ## W trakcie tworzenia:
 * dokumentacja
-* IComparable
 ## Do stworzenia:
 * implementacja
   * IClonable
@@ -42,15 +43,16 @@
 > I started without knowing about BigInteger.  
 > Optimalization will be done after everything else becouse my lack of experience.
 ## Last worked at: [IComparable](https://github.com/4Maksio/V-Long/tree/IComparable)
-> I overwritten method Equals and I added new constructor with _object?_
+> I have implemented IComparable and equality operators.  
+> I need to test it.
 ## Created:
 * constructors
 * WriteBinary
 * ToString()
-* Equals()
+* Equals(), ==, >, <, <=, >=.
+* IComparable
 ## In creation:
 * dokumentation
-* IComparable
 ## To create:
 * implementation
   * IClonableb
