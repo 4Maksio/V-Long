@@ -85,7 +85,6 @@ namespace Test
                     Console.WriteLine("Było {0} zamiast {1}", V, i);
             }
             Console.WriteLine("Koniec ulong");
-            */
 
             for (short i = short.MinValue; i < short.MaxValue; i++)
             {
@@ -93,6 +92,8 @@ namespace Test
                 if (!V.Equals(i))
                     Console.WriteLine(i);
             }
+            */
+
         }
     }
 }

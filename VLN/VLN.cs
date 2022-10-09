@@ -500,6 +500,7 @@ namespace VLN
         {
             switch (obj)
             {
+                case V_Long:
                 case sbyte:
                 case byte:
                 case short:
@@ -527,6 +528,98 @@ namespace VLN
         /// Get length of number in binary
         /// </summary>
         public int Table => number.Length;
+        public bool IsPositive => !number[0];
+
+        /// <summary>
+        /// Checks equality if o is basic numeric type.
+        /// </summary>
+        /// <param name="v">V_Long variable</param>
+        /// <param name="o">numeric (or not) variable</param>
+        /// <returns>Equality for numeric, false for the rest</returns>
+        public static bool operator ==(V_Long v, object? o) => v.Equals(o);
+        /// <summary>
+        /// Checks unequality if o is basic numeric type.
+        /// </summary>
+        /// <param name="v">V_Long variable</param>
+        /// <param name="o">numeric (or not) variable</param>
+        /// <returns>Unquality for numeric, true for the rest</returns>
+        public static bool operator !=(V_Long v, object? o) => !(v == o);
+        /// <summary>
+        /// Checks if V_long is greater than object?
+        /// </summary>
+        /// <param name="v">V_long</param>
+        /// <param name="o">Numeric (or not) type</param>
+        /// <returns>True if V_Long is greater than object?</returns>
+        /// <exception cref="NotNumericExeption">If object isn't basic numeric type</exception>
+        public static bool operator >(V_Long v, object? o)
+        {
+            if (IsOperatable(o))
+            {
+                V_Long tmp = new(o);
+                if (v.Table > tmp.Table && v.IsPositive && tmp.IsPositive || v.Table < tmp.Table && !v.IsPositive && !tmp.IsPositive || v.IsPositive && !tmp.IsPositive)
+                    return true;
+                if (!v.IsPositive && tmp.IsPositive)
+                    return false;
+                else if (v.Table == tmp.Table)
+                    for (int i = v.Table - 1; i > 0; i--)
+                    {
+                        if (v.number[i] && !tmp.number[i] && v.IsPositive || !v.number[i] && tmp.number[i] && !v.IsPositive)
+                            return true;
+                        else if (v.number[i] == tmp.number[i])
+                            continue;
+                        else
+                            break;
+                    }
+                return false;
+            }
+            throw new NotNumericExeption();
+        }
+        /// <summary>
+        /// Checks if V_long is smaller than object?
+        /// </summary>
+        /// <param name="v">V_long</param>
+        /// <param name="o">Numeric (or not) type</param>
+        /// <returns>True if V_Long is smaller than object?</returns>
+        /// <exception cref="NotNumericExeption">If object isn't basic numeric type</exception>
+        public static bool operator <(V_Long v, object? o)
+        {
+
+            if (IsOperatable(o))
+            {
+                V_Long tmp = new(o);
+                if (v.Table < tmp.Table && v.IsPositive && tmp.IsPositive || v.Table > tmp.Table && !v.IsPositive && !tmp.IsPositive || !v.IsPositive && tmp.IsPositive)
+                    return true;
+                if (v.IsPositive && !tmp.IsPositive)
+                    return false;
+                else if (v.Table == tmp.Table)
+                    for (int i = v.Table - 1; i > 0; i--)
+                    {
+                        if (!v.number[i] && tmp.number[i] && v.IsPositive || v.number[i] && !tmp.number[i] && !v.IsPositive)
+                            return true;
+                        else if (v.number[i] == tmp.number[i])
+                            continue;
+                        else
+                            break;
+                    }
+                return false;
+            }
+            throw new NotNumericExeption();
+        }
+        //  This can be optimized
+        /// <summary>
+        /// Is v bigger than or equal o
+        /// </summary>
+        /// <param name="v">V_Long</param>
+        /// <param name="o">object?</param>
+        /// <returns>True if v is not smaller than o</returns>
+        public static bool operator >=(V_Long v, object? o) => v > o || v == o;
+        /// <summary>
+        /// Is v smaller than or equal o
+        /// </summary>
+        /// <param name="v">V_Long</param>
+        /// <param name="o">object?</param>
+        /// <returns>True if v is not bigger than o</returns>
+        public static bool operator <=(V_Long v, object? o) => v < o || v == o;
 
         /// <summary>
         /// Returns number in decimal system
@@ -557,10 +650,9 @@ namespace VLN
         /// <returns>True if obj is equal<br/>false otherwise</returns>
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
-            if (obj is null)
+            if (!IsOperatable(obj))
                 return false;
-            V_Long v = new(obj);
-            return Equals(v);
+            return Equals(new V_Long(obj));
         }
         /// <summary>
         /// Compares this instance with another V_Long
@@ -590,7 +682,24 @@ namespace VLN
         /// -1 for obj beeing higher</returns>
         public int CompareTo(object? obj)
         {
-            throw new NotImplementedException();
+            if (IsOperatable(obj))
+            {
+                if (this == obj)
+                    return 0;
+                else if (this < obj)
+                    return -1;
+                else return 1;
+            }
+            else
+                throw new NotNumericExeption();
         }
+    }
+
+    /// <summary>
+    /// Use this when you can't compare V_Long with another object
+    /// </summary>
+    public class NotNumericExeption : ArgumentException
+    {
+        public NotNumericExeption() : base("Tried to compare V-Long with not basic numeric type") { }
     }
 }
