@@ -1,11 +1,12 @@
-﻿using System.Text;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text;
 
 namespace VLN
 {
     /// <summary>
     /// Very long integer number
     /// </summary>
-    public struct V_Long
+    public struct V_Long : IComparable
     {
         /// <summary>
         /// Table of bits with sign on first bit and the rest is writen from last to first.
@@ -25,6 +26,59 @@ namespace VLN
             this.number = number;
             decim = default;
             iniciate();
+        }
+        /// <summary>
+        /// Crates instance depending on type of argument
+        /// </summary>
+        /// <param name="obj">obj may be standard integer or other numeric type</param>
+        public V_Long(object? obj)
+        {
+            switch (obj)
+            {
+                case sbyte:
+                    this = new((sbyte)obj);
+                    break;
+                case byte:
+                    this = new((byte)obj);
+                    break;
+                case short:
+                    this = new((short)obj);
+                    break;
+                case ushort:
+                    this = new((ushort)obj);
+                    break;
+                case int:
+                    this = new((int)obj);
+                    break;
+                case uint:
+                    this = new((uint)obj);
+                    break;
+                case long:
+                    this = new((long)obj);
+                    break;
+                case ulong:
+                    this = new((ulong)obj);
+                    break;
+                case nint:
+                    this = new((nint)obj);
+                    break;
+                case nuint:
+                    this = new((nuint)obj);
+                    break;
+                case float:
+                    this = new(Convert.ToInt64((float)obj));
+                    break;
+                case double:
+                    this = new(Convert.ToInt64((double)obj));
+                    break;
+                case decimal:
+                    this = new(Convert.ToInt64((decimal)obj));
+                    break;
+                case null:
+                default:
+                    this = new(new[] { true });
+                    break;
+            }
         }
         /// <summary>
         /// This represents zero or null. Basicly useless.
@@ -357,7 +411,7 @@ namespace VLN
                 }
                 while (tmp < number.Length-1)
                 {
-                    decim[tmp] = Sum(decim[tmp - 1], decim[tmp - 1]);
+                    decim[tmp] = sum(decim[tmp - 1], decim[tmp - 1]);
                     tmp++;
                 }
             }
@@ -368,7 +422,7 @@ namespace VLN
         /// <param name="a">first digit</param>
         /// <param name="b">second digit</param>
         /// <returns>Unit of sum of digits</returns>
-        private char AddDecimal(char a, char b)
+        private char addDecimal(char a, char b)
         {
             byte tmp = (byte)(a + b - 2 * '0');
             if (tmp >= 10)
@@ -381,7 +435,7 @@ namespace VLN
         /// <param name="A">first char table</param>
         /// <param name="B">second char table</param>
         /// <returns>Char of digits of sum of tables</returns>
-        private char[] Sum(char[] A, char[] B)
+        private char[] sum(char[] A, char[] B)
         {
             if (A.Length == 0)
                 return B;
@@ -394,12 +448,12 @@ namespace VLN
             for (int i = 1; i < chars.Length; i++)
             {
                 if (A.Length >= chars.Length - i)
-                    chars[i] = AddDecimal(chars[i], A[i - (chars.Length - A.Length)]);
+                    chars[i] = addDecimal(chars[i], A[i - (chars.Length - A.Length)]);
                 if (B.Length >= chars.Length - i)
-                    chars[i] = AddDecimal(chars[i], B[i - (chars.Length - B.Length)]);
+                    chars[i] = addDecimal(chars[i], B[i - (chars.Length - B.Length)]);
                 if (A.Length >= chars.Length - i && B.Length >= chars.Length - i)
                 {
-                    tmp = AddDecimal(A[i - (chars.Length - A.Length)], B[i - (chars.Length - B.Length)]);
+                    tmp = addDecimal(A[i - (chars.Length - A.Length)], B[i - (chars.Length - B.Length)]);
                     if (tmp < A[i - (chars.Length - A.Length)] && tmp < B[i - (chars.Length - B.Length)])
                         overflow(ref chars, i);
                 }
@@ -422,7 +476,7 @@ namespace VLN
         {
             if (idx == 0)
                 throw new Exception("Table not prepared for operation. Overflow occured.");
-            c[idx - 1] = AddDecimal(c[idx - 1], '1');
+            c[idx - 1] = addDecimal(c[idx - 1], '1');
             if (c[idx - 1] == '0')
                 overflow(ref c, idx - 1);
         }
@@ -437,11 +491,135 @@ namespace VLN
                 sb.Append(bTi(b));
             return sb.ToString();
         }
+        /// <summary>
+        /// Checks if object can be converted into V_Long
+        /// </summary>
+        /// <param name="obj">Object for beeing checked</param>
+        /// <returns>True for any basic numeric type</returns>
+        public static bool IsOperatable(object? obj)
+        {
+            switch (obj)
+            {
+                case V_Long:
+                case sbyte:
+                case byte:
+                case short:
+                case ushort:
+                case int:
+                case uint:
+                case long:
+                case ulong:
+                case nint:
+                case nuint:
+                case float:
+                case double:
+                case decimal:
+                    return true;
+                default:
+                    return false;
+            }
+        }
 
+        /// <summary>
+        /// Returns if the instance was created incorrectly
+        /// </summary>
+        public bool IsNone => number.Length == 1 && number[0] == true;
         /// <summary>
         /// Get length of number in binary
         /// </summary>
         public int Table => number.Length;
+        public bool IsPositive => !number[0];
+
+        /// <summary>
+        /// Checks equality if o is basic numeric type.
+        /// </summary>
+        /// <param name="v">V_Long variable</param>
+        /// <param name="o">numeric (or not) variable</param>
+        /// <returns>Equality for numeric, false for the rest</returns>
+        public static bool operator ==(V_Long v, object? o) => v.Equals(o);
+        /// <summary>
+        /// Checks unequality if o is basic numeric type.
+        /// </summary>
+        /// <param name="v">V_Long variable</param>
+        /// <param name="o">numeric (or not) variable</param>
+        /// <returns>Unquality for numeric, true for the rest</returns>
+        public static bool operator !=(V_Long v, object? o) => !(v == o);
+        /// <summary>
+        /// Checks if V_long is greater than object?
+        /// </summary>
+        /// <param name="v">V_long</param>
+        /// <param name="o">Numeric (or not) type</param>
+        /// <returns>True if V_Long is greater than object?</returns>
+        /// <exception cref="NotNumericExeption">If object isn't basic numeric type</exception>
+        public static bool operator >(V_Long v, object? o)
+        {
+            if (IsOperatable(o))
+            {
+                V_Long tmp = new(o);
+                if (v.Table > tmp.Table && v.IsPositive && tmp.IsPositive || v.Table < tmp.Table && !v.IsPositive && !tmp.IsPositive || v.IsPositive && !tmp.IsPositive)
+                    return true;
+                if (!v.IsPositive && tmp.IsPositive)
+                    return false;
+                else if (v.Table == tmp.Table)
+                    for (int i = v.Table - 1; i > 0; i--)
+                    {
+                        if (v.number[i] && !tmp.number[i] && v.IsPositive || !v.number[i] && tmp.number[i] && !v.IsPositive)
+                            return true;
+                        else if (v.number[i] == tmp.number[i])
+                            continue;
+                        else
+                            break;
+                    }
+                return false;
+            }
+            throw new NotNumericExeption();
+        }
+        /// <summary>
+        /// Checks if V_long is smaller than object?
+        /// </summary>
+        /// <param name="v">V_long</param>
+        /// <param name="o">Numeric (or not) type</param>
+        /// <returns>True if V_Long is smaller than object?</returns>
+        /// <exception cref="NotNumericExeption">If object isn't basic numeric type</exception>
+        public static bool operator <(V_Long v, object? o)
+        {
+
+            if (IsOperatable(o))
+            {
+                V_Long tmp = new(o);
+                if (v.Table < tmp.Table && v.IsPositive && tmp.IsPositive || v.Table > tmp.Table && !v.IsPositive && !tmp.IsPositive || !v.IsPositive && tmp.IsPositive)
+                    return true;
+                if (v.IsPositive && !tmp.IsPositive)
+                    return false;
+                else if (v.Table == tmp.Table)
+                    for (int i = v.Table - 1; i > 0; i--)
+                    {
+                        if (!v.number[i] && tmp.number[i] && v.IsPositive || v.number[i] && !tmp.number[i] && !v.IsPositive)
+                            return true;
+                        else if (v.number[i] == tmp.number[i])
+                            continue;
+                        else
+                            break;
+                    }
+                return false;
+            }
+            throw new NotNumericExeption();
+        }
+        //  This can be optimized
+        /// <summary>
+        /// Is v bigger than or equal o
+        /// </summary>
+        /// <param name="v">V_Long</param>
+        /// <param name="o">object?</param>
+        /// <returns>True if v is not smaller than o</returns>
+        public static bool operator >=(V_Long v, object? o) => v > o || v == o;
+        /// <summary>
+        /// Is v smaller than or equal o
+        /// </summary>
+        /// <param name="v">V_Long</param>
+        /// <param name="o">object?</param>
+        /// <returns>True if v is not bigger than o</returns>
+        public static bool operator <=(V_Long v, object? o) => v < o || v == o;
 
         /// <summary>
         /// Returns number in decimal system
@@ -454,7 +632,7 @@ namespace VLN
             for (int i = 1; i < number.Length; i++)
             {
                 if (number[i])
-                    liczba = Sum(liczba, decim[i - 1]);
+                    liczba = sum(liczba, decim[i - 1]);
             }
             StringBuilder sb = new();
             if (number[0])
@@ -465,5 +643,63 @@ namespace VLN
             }
             return sb.ToString();
         }
+        /// <summary>
+        /// Compares object with instance of V_Long
+        /// </summary>
+        /// <param name="obj">Object representing a number</param>
+        /// <returns>True if obj is equal<br/>false otherwise</returns>
+        public override bool Equals([NotNullWhen(true)] object? obj)
+        {
+            if (!IsOperatable(obj))
+                return false;
+            return Equals(new V_Long(obj));
+        }
+        /// <summary>
+        /// Compares this instance with another V_Long
+        /// </summary>
+        /// <param name="v">V_Long variable</param>
+        /// <returns>True if obj is equal<br/>false otherwise</returns>
+        public bool Equals(V_Long v)
+        {
+            if (Table == v.Table && number[0] == v.number[0])
+            {
+                for(int i = number.Length-1; i >=0; i--)
+                {
+                    if (number[i] != v.number[i])
+                        return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Compares V-Long with any integer type
+        /// </summary>
+        /// <param name="obj">Structure beeing Compared to</param>
+        /// <returns>1 for obj beeing lower<br/>
+        /// 0 for equality<br/>
+        /// -1 for obj beeing higher</returns>
+        public int CompareTo(object? obj)
+        {
+            if (IsOperatable(obj))
+            {
+                if (this == obj)
+                    return 0;
+                else if (this < obj)
+                    return -1;
+                else return 1;
+            }
+            else
+                throw new NotNumericExeption();
+        }
+    }
+
+    /// <summary>
+    /// Use this when you can't compare V_Long with another object
+    /// </summary>
+    public class NotNumericExeption : ArgumentException
+    {
+        public NotNumericExeption() : base("Tried to compare V-Long with not basic numeric type") { }
     }
 }
