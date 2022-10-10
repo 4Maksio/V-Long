@@ -1,23 +1,26 @@
 # V-Long
 
-#### 04.10.2022
+#### 09.10.2022
 
 ### PL
 ## O projekcie
 > Tworzę bibliotekę w C# mającą strukturę, która będzie realizowała podstawowe działania na liczbach spoza zakresu Int64 i Uint64.  
 > Zacząłem projekt zanim dowiedziałem się o istnieniu BigInteger.  
 > Optymalizuję co mi wpadnie do głowy na bierząco, będę optymalizował na końcu. Nie mam jeszcze doświadczenia zawodowego w związku z programowaniem.
-## Ostatnio modyfikowana gałąź: [master](https://github.com/4Maksio/V-Long/tree/master)
-> Tablica przechowująca tablice znaków do wypisania kolejnych potęg dwójki jest teraz statyczna.
+## Ostatnio modyfikowana gałąź: [IComparable](https://github.com/4Maksio/V-Long/tree/IComparable)
+> Zaimplementowałem operatory porównania i interfejs IComparable.  
+> Potrzebuję sprawdzić działanie.
 ## Stworzone:
 * konstruktory
 * WriteBinary
 * ToString()
+* Equals(), ==, >, <, <=, >=.
+* IComparable
 ## W trakcie tworzenia:
 * dokumentacja
 ## Do stworzenia:
 * implementacja
-  * IComparable
+  * IClonable
   * ISerializable
 * operatory
   * \+
@@ -39,17 +42,20 @@
 > I'm creating library in C# that have struct witch will be doing basic operations on integers without limiting them to be written on 64 bits.
 > I started without knowing about BigInteger.  
 > Optimalization will be done after everything else becouse my lack of experience.
-## Last worked at: [master](https://github.com/4Maksio/V-Long/tree/master)
-> Array containing chars arrays for ToString() is now static.
+## Last worked at: [IComparable](https://github.com/4Maksio/V-Long/tree/IComparable)
+> I have implemented IComparable and equality operators.  
+> I need to test it.
 ## Created:
 * constructors
 * WriteBinary
 * ToString()
+* Equals(), ==, >, <, <=, >=.
+* IComparable
 ## In creation:
 * dokumentation
 ## To create:
 * implementation
-  * IComparable
+  * IClonableb
   * ISerializable
 * operators
   * \+
@@ -60,7 +66,7 @@
   * ^
 ## To modify:
 * using V-Long within itself when it's necessary
-* add coments for local variables
+* add comments for local variables
 ## To think about:
 * logical operators
   * |
