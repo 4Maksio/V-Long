@@ -9,7 +9,6 @@
 > Optymalizuję co mi wpadnie do głowy na bierząco, będę optymalizował na końcu. Nie mam jeszcze doświadczenia zawodowego w związku z programowaniem.
 ## Ostatnio modyfikowana gałąź: [IComparable](https://github.com/4Maksio/V-Long/tree/IComparable)
 > Zaimplementowałem operatory porównania i interfejs IComparable.  
-> Potrzebuję sprawdzić działanie.
 ## Stworzone:
 * konstruktory
 * WriteBinary
@@ -32,6 +31,7 @@
 ## Do zmodyfikowania:
 * używanie struktury w samej sobie tam, gdzie jest to potrzebne
 * dodanie opisu zmiennych lokalnych
+* TryParse(string)
 ## Do zastanowienia:
 * operatory logiczne
   * |
@@ -43,8 +43,7 @@
 > I started without knowing about BigInteger.  
 > Optimalization will be done after everything else becouse my lack of experience.
 ## Last worked at: [IComparable](https://github.com/4Maksio/V-Long/tree/IComparable)
-> I have implemented IComparable and equality operators.  
-> I need to test it.
+> I have implemented IComparable and equality operators.
 ## Created:
 * constructors
 * WriteBinary
@@ -67,6 +66,7 @@
 ## To modify:
 * using V-Long within itself when it's necessary
 * add comments for local variables
+* TryParse(string)
 ## To think about:
 * logical operators
   * |
