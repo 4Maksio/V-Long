@@ -1,6 +1,6 @@
 # V-Long
 
-#### 09.10.2022
+#### 10.10.2022
 
 ### PL
 ## O projekcie
@@ -28,10 +28,10 @@
   * /
   * %
   * ^
+* TryParse(string)
 ## Do zmodyfikowania:
 * używanie struktury w samej sobie tam, gdzie jest to potrzebne
 * dodanie opisu zmiennych lokalnych
-* TryParse(string)
 ## Do zastanowienia:
 * operatory logiczne
   * |
@@ -63,10 +63,10 @@
   * /
   * %
   * ^
+* TryParse(string)
 ## To modify:
 * using V-Long within itself when it's necessary
 * add comments for local variables
-* TryParse(string)
 ## To think about:
 * logical operators
   * |
